@@ -1,4 +1,4 @@
-# 始料未及，如此甚幸
+# 未及
 
 > 「未及」的学术宇宙：一个荒诞又真实的域名艺术项目
 
@@ -16,19 +16,10 @@
 
 ## 诞生记：从 Not Even 到 Not Ending 
 
-```mermaid
-graph LR
-    A[.edu.kg域名] --> B[未及研究院]
-    A --> C[甚幸学社]
-    B --> D[摸鱼白皮书]
-    C --> E[运气仪表盘]
-    D & E --> F[学术反内卷运动]
-    F --> G[拯救世界的严肃性]
-```
+Because Not Even, Therefore Never Ending
+
 
 ## 快速导航
-
-### 未及 (Not Even)
 - 官网主页：[https://ne.edu.kg](https://ne.edu.kg/)
 - 核心课题：
   - 《能量守恒式学习法》
@@ -64,7 +55,7 @@ graph LR
 
 ## 贡献指南
 
-欢迎提交你的「未完成」与「小确幸」：
+欢迎提交你的「未完成」：
 
 ```markdown
 未完成作品投递区：
