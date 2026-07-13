@@ -1,413 +1,445 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>未及研习 | 无止境 · 未完成</title>
-    <style>
-        :root {
-            --ne-red: #e63946;        /* 未完成警示色 */
-            --ne-gray: #6c757d;       /* 未确定灰度 */
-            --ne-light: #f8f9fa;      /* 未触及浅色 */
-        }
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            background: linear-gradient(135deg, #ffffff 0%, #f1f3f9 100%);
-            font-family: 'LXGW WenKai', 'Source Han Sans', sans-serif;
-            color: #212529;
-            line-height: 1.6;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>未及 | Not Even</title>
 
-        /* === 头部样式 === */
-        header {
-            text-align: center;
-            padding: 4rem 0 3rem;
-            border-bottom: 2px dashed var(--ne-red);
-            position: relative;
-            overflow: hidden;
-        }
-        .logo {
-            font-size: 5.5rem;
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-        .cn {
-            font-weight: 700;
-            letter-spacing: 5px;
-            display: block;
-        }
-        .en {
-            font-size: 2.2rem;
-            opacity: 0.65;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-weight: 300;
-            letter-spacing: 3px;
-        }
-        .slogan {
-            font-size: 1.3rem;
-            color: var(--ne-gray);
-            margin-top: 1rem;
-        }
-        .ne-desc {
-            font-size: 1rem;
-            color: var(--ne-red);
-            margin-top: 0.5rem;
-            letter-spacing: 1px;
-        }
-        
-        /* === 粒子动画 === */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-        .particle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: var(--ne-red);
-            border-radius: 50%;
-            opacity: 0.3;
-        }
+<style>
 
-        /* === 主要内容 === */
-        main {
-            padding: 3rem 0;
-        }
-        section {
-            margin-bottom: 4rem;
-        }
-        h2 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px dotted var(--ne-gray);
-            position: relative;
-        }
-        h2::before {
-            content: "▍";
-            color: var(--ne-red);
-            margin-right: 8px;
-        }
-        
-        /* 核心研究区域 */
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        .research-card {
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            border-left: 4px solid var(--ne-red);
-        }
-        .research-card:hover {
-            transform: translateY(-5px);
-        }
-        .research-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: #343a40;
-        }
-        .research-card p {
-            color: #495057;
-            margin-bottom: 15px;
-            min-height: 80px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 8px 20px;
-            background: var(--ne-red);
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: 2px solid var(--ne-red);
-        }
-        .btn:hover {
-            background: transparent;
-            color: var(--ne-red);
-        }
-        .btn-ghost {
-            background: transparent;
-            color: var(--ne-red);
-        }
-        .btn-ghost:hover {
-            background: var(--ne-red);
-            color: white;
-        }
-        
-        /* 未完成项目 */
-        .project-item {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
-        }
-        .progress-container {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 10px;
-            margin: 10px 0 15px;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 100%;
-            background: var(--ne-red);
-            border-radius: 10px;
-            width: 47%; /* 标志性未完成进度 */
-            position: relative;
-        }
-        .progress-bar::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 20%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));
-        }
-        
-        /* 未及哲学 */
-        .philosophy {
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 40px 0;
-            position: relative;
-        }
-        .philosophy::before {
-            content: """;
-            position: absolute;
-            top: -30px;
-            left: 20px;
-            font-size: 120px;
-            color: rgba(230, 57, 70, 0.1);
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-        .philosophy blockquote {
-            font-size: 1.4rem;
-            line-height: 1.8;
-            color: #495057;
-            margin-bottom: 1.5rem;
-            font-style: italic;
-        }
-        .philosophy-author {
-            text-align: right;
-            color: var(--ne-gray);
-            font-size: 1.1rem;
-        }
-        
-        /* 页脚 */
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            color: var(--ne-gray);
-            font-size: 0.9rem;
-            border-top: 1px dashed #dee2e6;
-        }
-        .footer-links {
-            margin: 15px 0;
-        }
-        .footer-links a {
-            color: var(--ne-gray);
-            margin: 0 10px;
-            text-decoration: none;
-        }
-        .footer-links a:hover {
-            color: var(--ne-red);
-        }
-        
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 3.5rem;
-            }
-            .en {
-                font-size: 1.5rem;
-            }
-            .philosophy {
-                padding: 25px;
-            }
-            .philosophy blockquote {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+:root{
+    --bg1:#0f172a;
+    --bg2:#1e293b;
+    --text:#f8fafc;
+    --sub:#cbd5e1;
+    --accent:#f59e0b;
+    --line:rgba(255,255,255,.15);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:
+        radial-gradient(circle at 20% 20%, rgba(245,158,11,.15), transparent 300px),
+        radial-gradient(circle at 80% 70%, rgba(59,130,246,.12), transparent 400px),
+        linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+                "Microsoft YaHei",sans-serif;
+    overflow-x:hidden;
+}
+
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:40px;
+}
+
+.content{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+h1{
+    font-size:clamp(4rem,10vw,7rem);
+    letter-spacing:.25em;
+    font-weight:700;
+}
+
+.en{
+    margin-top:10px;
+    color:var(--sub);
+    letter-spacing:.3em;
+    text-transform:uppercase;
+}
+
+.tagline{
+    margin-top:40px;
+    font-size:1.5rem;
+}
+
+.quote{
+    margin-top:18px;
+    color:var(--accent);
+    font-style:italic;
+    font-size:1.1rem;
+}
+
+.desc{
+    margin:60px auto 0;
+    max-width:650px;
+    color:var(--sub);
+    font-size:1.1rem;
+    line-height:2;
+}
+
+/* 未闭合圆环 */
+
+.ring{ position:absolute; width:600px; height:600px; border-radius:50%; border:2px solid rgba(255,255,255,.08); top:50%; left:50%; transform:translate(-50%,-50%); } .ring::before{ content:""; position:absolute; inset:-2px; border-radius:50%; border:2px solid transparent; border-top-color:rgba(255,255,255,.5); border-right-color:rgba(255,255,255,.5); border-bottom-color:rgba(255,255,255,.5); }
+
+/* 无止境轨迹 */
+
+.path{
+    position:absolute;
+    bottom:120px;
+    left:10%;
+    width:80%;
+    height:1px;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        rgba(255,255,255,.3),
+        transparent
+    );
+}
+
+.path::after{
+    content:"";
+    position:absolute;
+    right:0;
+    top:-4px;
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 20px var(--accent);
+}
+
+/* 山脊线 */
+
+.mountain{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:180px;
+    background:
+    polygon(
+      0 100%,
+      20% 45%,
+      35% 70%,
+      50% 35%,
+      70% 75%,
+      85% 40%,
+      100% 100%
+    );
+}
+
+svg{
+    position:absolute;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:220px;
+    opacity:.25;
+}
+
+/* 星点 */
+
+.star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:var(--accent);
+    border-radius:50%;
+    box-shadow:0 0 10px var(--accent);
+}
+
+.s1{top:20%;left:18%;}
+.s2{top:32%;left:72%;}
+.s3{top:15%;left:82%;}
+.s4{top:60%;left:28%;}
+
+.signature{
+
+    position:absolute;
+    bottom:35px;
+    left:50%;
+    transform:translateX(-50%);
+
+    text-align:center;
+
+    color:rgba(255,255,255,.45);
+
+    letter-spacing:.15em;
+
+    font-size:.85rem;
+
+    line-height:2;
+
+}
+
+
+.signature div:first-child{
+
+    font-size:0.8rem;
+
+    color:rgba(255,255,255,.75);
+
+    letter-spacing:.3em;
+
+}
+
+/* ========== 新粒子轨道（不再旋转，由 JS 控制位置） ========== */
+.orbit{
+    position:absolute;
+    width:600px;
+    height:600px;
+    border-radius:50%;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    pointer-events: none;
+}
+
+/* ========== 主粒子 ========== */
+#main-particle{
+    position:absolute;
+    left:0;
+    top:0;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:#f59e0b;
+    box-shadow:
+        0 0 15px #f59e0b,
+        0 0 50px #f59e0b,
+        0 0 90px rgba(245,158,11,.6);
+    transform: translate(-50%, -50%);
+    z-index:10;
+    will-change: transform;
+}
+
+/* ========== 抛洒光点 ========== */
+.spark{
+    position:absolute;
+    border-radius:50%;
+    background:#f59e0b;
+    box-shadow: 0 0 8px #f59e0b, 0 0 20px rgba(245,158,11,0.5);
+    pointer-events:none;
+    will-change: transform, opacity;
+    left:0;
+    top:0;
+}
+
+/* ========== 响应式 ========== */
+@media (max-width: 600px) {
+    .orbit {
+        width: 360px;
+        height: 360px;
+    }
+    #main-particle {
+        width: 10px;
+        height: 10px;
+    }
+}
+@media (max-width: 400px) {
+    .orbit {
+        width: 260px;
+        height: 260px;
+    }
+    #main-particle {
+        width: 8px;
+        height: 8px;
+    }
+}
+</style>
 </head>
-<body>
-    <div class="container">
-        <!-- 头部 -->
-        <header>
-            <h1 class="logo">
-                <span class="cn">未及</span>
-                <span class="en">Not Even Studio</span>
-            </h1>
-            <p class="slogan">抵达是例外 · 未及是常态</p>
-            <p class="ne-desc">Because Not Even, Therefore Never Ending</p>
-        </header>
 
-        <main>
-            <!-- 核心研究领域 -->
-            <section id="research">
-                <h2>核心研究领域</h2>
-                <div class="research-grid">
-                    <div class="research-card">
-                        <h3>能量守恒式学习法</h3>
-                        <p>揭示当ddl距离＞72小时，人类生产力趋近于0的量子态现象，探索拖延行为的时空连续性</p>
-                        <a href="#" class="btn">查看未完成报告</a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>未完成美学评估体系</h3>
-                        <p>建立半成品艺术的价值标准：残缺代码的诗意、草稿笔记的野性美、未提交论文的悬念张力</p>
-                        <a href="#" class="btn">查看未完成报告</a>
-                    </div>
-                    
-                    <div class="research-card">
-                        <h3>认知资源动态分配学</h3>
-                        <p>研究如何将90%脑力分配给B站/Netflix，同时用剩余10%维持"我在努力"的表象平衡</p>
-                        <a href="#" class="btn">查看未完成报告</a>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- 未及哲学 -->
-            <section class="philosophy">
-                <blockquote>
-                    “未及不是放弃，而是对过程无止境的敬畏。那些深夜亮着的屏幕、堆满草稿的桌面、写了一半又删掉的句子，都是对抗完美暴政的温柔革命。因为 Never Ending，所以我们永远在路上。”
-                </blockquote>
-                <p class="philosophy-author">——《未及宣言》第一章 · 无止境</p>
-            </section>
-            
-            <!-- 永久施工中项目 -->
-            <section id="projects">
-                <h2>永久施工中项目</h2>
-                
-                <div class="project-item">
-                    <h3>全球摸鱼行为白皮书</h3>
-                    <div class="progress-container">
-                        <div class="progress-bar"></div>
-                    </div>
-                    <p>收集17国学生/社畜的创造性摸鱼策略，目前完成47%（卡在数据分析环节）</p>
-                    <a href="#" class="btn btn-ghost">贡献你的策略</a>
-                </div>
-                
-                <div class="project-item">
-                    <h3>用ChatGPT重写《论语》</h3>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 8.3%"></div>
-                    </div>
-                    <p>"学而时习之，不亦说乎" → "持续学习可提高多巴胺分泌？"（完成8.3章后灵感枯竭）</p>
-                </div>
-                
-                <div class="project-item">
-                    <h3>未完成作品博物馆</h3>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 31%"></div>
-                    </div>
-                    <p>线上展馆：收藏只写了开头的科幻小说、画了线稿的插画、只有README的GitHub仓库...</p>
-                    <a href="#" class="btn btn-ghost">提交你的半成品</a>
-                </div>
-            </section>
-        </main>
-        
-        <footer>
-            <div class="footer-links">
-                <a href="#">未及哲学</a>
-                <a href="#">施工中项目</a>
-                <a href="#">加入我们</a>
-            </div>
-            <p>©2025 未及研习 | 格言：<q>完成是例外，未及是常态，无止境是归宿</q></p>
-        </footer>
+<body>
+
+<div class="hero">
+
+    <div class="ring"></div>
+    <div class="orbit" id="orbit">
+        <div id="main-particle"></div>
     </div>
 
-    <script>
-        // 粒子动画生成
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 25;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // 随机位置
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                
-                // 随机动画
-                const size = 3 + Math.random() * 7;
-                const duration = 3 + Math.random() * 7;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.animation = `float ${duration}s infinite ease-in-out`;
-                
-                container.appendChild(particle);
-            }
-            
-            // 添加CSS动画
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes float {
-                    0%, 100% { transform: translate(0, 0); }
-                    25% { transform: translate(${Math.random()*10}px, ${Math.random()*15}px); }
-                    50% { transform: translate(${Math.random()*20}px, ${Math.random()*10}px); }
-                    75% { transform: translate(${Math.random()*15}px, ${Math.random()*20}px); }
-                }
-            `;
-            document.head.appendChild(style);
+    <div class="star s1"></div>
+    <div class="star s2"></div>
+    <div class="star s3"></div>
+    <div class="star s4"></div>
+
+    <div class="content">
+
+        <h1>未及</h1>
+
+        <div class="en">
+            NOT EVEN · NE
+        </div>
+
+        <div class="tagline">
+            抵达是例外 · 未及是常态
+        </div>
+
+        <div class="quote">
+            Because Not Even, Therefore Never Ending
+        </div>
+
+        <div class="desc">
+            我们记录那些尚未完成之事。<br>
+            偶有幸甚，不过是误差落在正确的一侧。<br>
+            而大多数时候，我们仍在路上。
+        </div>
+
+    </div>
+
+    <div class="path"></div>
+
+  <div class="signature">
+
+    <div>未及</div>
+
+    <div>
+        Not Even · NE
+    </div>
+
+    <div>
+        Because Not Even, Therefore Never Ending
+    </div>
+
+</div>
+
+    <svg viewBox="0 0 1000 220" preserveAspectRatio="none">
+        <path
+        d="M0 220
+           L150 100
+           L280 160
+           L430 60
+           L600 180
+           L760 90
+           L900 140
+           L1000 70
+           L1000 220 Z"
+        fill="rgba(255,255,255,.08)"/>
+    </svg>
+
+</div>
+
+<script>
+    (function() {
+        const orbit = document.getElementById('orbit');
+        const particle = document.getElementById('main-particle');
+
+        // ----- 轨道尺寸 -----
+        let radius = 0;
+        let centerX = 0;
+        let centerY = 0;
+
+        function updateSize() {
+            const w = orbit.offsetWidth;
+            const h = orbit.offsetHeight;
+            radius = Math.min(w, h) / 2;
+            centerX = w / 2;
+            centerY = h / 2;
         }
-        
-        // 初始化
-        window.onload = function() {
-            createParticles();
-            
-            // 为所有按钮添加抖动效果
-            const buttons = document.querySelectorAll('.btn');
-            buttons.forEach(btn => {
-                btn.addEventListener('mouseover', function() {
-                    this.style.animation = 'shake 0.5s';
-                    setTimeout(() => {
-                        this.style.animation = '';
-                    }, 500);
-                });
+        updateSize();
+        const resizeObserver = new ResizeObserver(() => updateSize());
+        resizeObserver.observe(orbit);
+
+        // ----- 粒子运动参数 -----
+        let angle = 0;
+        const angularSpeed = 0.015;     // 弧度/帧
+
+        // ----- 光点参数（正后方抛洒，带散射） -----
+        const sparkLifetime = 1.8;       // 秒
+        const spawnInterval = 0.08;      // 秒
+        const sparkSpeed = 200;          // 像素/秒
+        const spreadAngle = 0.35;        // 散射半角（弧度） ← 此处添加
+
+        let lastSpawnTime = 0;
+        const sparks = [];
+
+        // ----- 生成光点 -----
+        function createSpark(posX, posY, dirAngle) {
+            const el = document.createElement('div');
+            el.className = 'spark';
+            const size = 4 + Math.random() * 5;
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            el.style.opacity = '1';
+            el.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%) scale(1)`;
+            orbit.appendChild(el);
+
+            const vx = Math.cos(dirAngle) * sparkSpeed;
+            const vy = Math.sin(dirAngle) * sparkSpeed;
+            sparks.push({
+                element: el,
+                birth: performance.now() / 1000,
+                vx: vx,
+                vy: vy,
+                startX: posX,
+                startY: posY,
             });
-            
-            // 添加抖动动画
-            const shakeStyle = document.createElement('style');
-            shakeStyle.textContent = `
-                @keyframes shake {
-                    0%, 100% { transform: translateX(0); }
-                    20% { transform: translateX(-5px); }
-                    40% { transform: translateX(5px); }
-                    60% { transform: translateX(-5px); }
-                    80% { transform: translateX(5px); }
+        }
+
+        // ----- 更新光点 -----
+        function updateSparks(nowSec) {
+            let i = sparks.length;
+            while (i--) {
+                const s = sparks[i];
+                const age = nowSec - s.birth;
+                if (age >= sparkLifetime) {
+                    if (s.element.parentNode) s.element.parentNode.removeChild(s.element);
+                    sparks.splice(i, 1);
+                    continue;
                 }
-            `;
-            document.head.appendChild(shakeStyle);
-        };
-    </script>
+                const x = s.startX + s.vx * age;
+                const y = s.startY + s.vy * age;
+                const progress = age / sparkLifetime;
+                s.element.style.transform =
+                    `translate(${x}px, ${y}px) translate(-50%, -50%) scale(${1 - progress * 0.8})`;
+                s.element.style.opacity = 1 - progress * progress;
+            }
+        }
+
+        // ----- 主循环 -----
+        function animate(timestamp) {
+            const nowSec = timestamp / 1000;
+
+            // 粒子位置
+            angle += angularSpeed;
+            if (angle > 2 * Math.PI) angle -= 2 * Math.PI;
+            const px = centerX + radius * Math.cos(angle);
+            const py = centerY + radius * Math.sin(angle);
+            particle.style.transform = `translate(${px}px, ${py}px) translate(-50%, -50%)`;
+
+            // 运动方向（顺时针切线）及正后方
+            const dirX = Math.sin(angle);
+            const dirY = -Math.cos(angle);
+            const backX = -dirX;
+            const backY = -dirY;
+            const baseAngle = Math.atan2(backY, backX);
+
+            // 生成光点（带散射）← 修改处
+            if (nowSec - lastSpawnTime >= spawnInterval) {
+                lastSpawnTime = nowSec;
+                const randomOffset = (Math.random() - 0.5) * 2 * spreadAngle;
+                const finalAngle = baseAngle + randomOffset;
+                createSpark(px, py, finalAngle);
+            }
+
+            updateSparks(nowSec);
+            requestAnimationFrame(animate);
+        }
+
+        // ----- 启动 -----
+        const initPx = centerX + radius * Math.cos(0);
+        const initPy = centerY + radius * Math.sin(0);
+        particle.style.transform = `translate(${initPx}px, ${initPy}px) translate(-50%, -50%)`;
+        lastSpawnTime = performance.now() / 1000;
+        requestAnimationFrame(animate);
+    })();
+</script>
+
 </body>
 </html>
