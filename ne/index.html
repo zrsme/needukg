@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未及研习 | 无止境 · 未完成</title>
+    <style>
+        :root {
+            --ne-red: #e63946;        /* 未完成警示色 */
+            --ne-gray: #6c757d;       /* 未确定灰度 */
+            --ne-light: #f8f9fa;      /* 未触及浅色 */
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f9 100%);
+            font-family: 'LXGW WenKai', 'Source Han Sans', sans-serif;
+            color: #212529;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === 头部样式 === */
+        header {
+            text-align: center;
+            padding: 4rem 0 3rem;
+            border-bottom: 2px dashed var(--ne-red);
+            position: relative;
+            overflow: hidden;
+        }
+        .logo {
+            font-size: 5.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        .cn {
+            font-weight: 700;
+            letter-spacing: 5px;
+            display: block;
+        }
+        .en {
+            font-size: 2.2rem;
+            opacity: 0.65;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 300;
+            letter-spacing: 3px;
+        }
+        .slogan {
+            font-size: 1.3rem;
+            color: var(--ne-gray);
+            margin-top: 1rem;
+        }
+        .ne-desc {
+            font-size: 1rem;
+            color: var(--ne-red);
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        /* === 粒子动画 === */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--ne-red);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        /* === 主要内容 === */
+        main {
+            padding: 3rem 0;
+        }
+        section {
+            margin-bottom: 4rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dotted var(--ne-gray);
+            position: relative;
+        }
+        h2::before {
+            content: "▍";
+            color: var(--ne-red);
+            margin-right: 8px;
+        }
+        
+        /* 核心研究区域 */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .research-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-left: 4px solid var(--ne-red);
+        }
+        .research-card:hover {
+            transform: translateY(-5px);
+        }
+        .research-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #343a40;
+        }
+        .research-card p {
+            color: #495057;
+            margin-bottom: 15px;
+            min-height: 80px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--ne-red);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--ne-red);
+        }
+        .btn:hover {
+            background: transparent;
+            color: var(--ne-red);
+        }
+        .btn-ghost {
+            background: transparent;
+            color: var(--ne-red);
+        }
+        .btn-ghost:hover {
+            background: var(--ne-red);
+            color: white;
+        }
+        
+        /* 未完成项目 */
+        .project-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.03);
+        }
+        .progress-container {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin: 10px 0 15px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background: var(--ne-red);
+            border-radius: 10px;
+            width: 47%; /* 标志性未完成进度 */
+            position: relative;
+        }
+        .progress-bar::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 20%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.7));
+        }
+        
+        /* 未及哲学 */
+        .philosophy {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            position: relative;
+        }
+        .philosophy::before {
+            content: """;
+            position: absolute;
+            top: -30px;
+            left: 20px;
+            font-size: 120px;
+            color: rgba(230, 57, 70, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        .philosophy blockquote {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #495057;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        .philosophy-author {
+            text-align: right;
+            color: var(--ne-gray);
+            font-size: 1.1rem;
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--ne-gray);
+            font-size: 0.9rem;
+            border-top: 1px dashed #dee2e6;
+        }
+        .footer-links {
+            margin: 15px 0;
+        }
+        .footer-links a {
+            color: var(--ne-gray);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--ne-red);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            .en {
+                font-size: 1.5rem;
+            }
+            .philosophy {
+                padding: 25px;
+            }
+            .philosophy blockquote {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header>
+            <h1 class="logo">
+                <span class="cn">未及</span>
+                <span class="en">Not Even Studio</span>
+            </h1>
+            <p class="slogan">抵达是例外 · 未及是常态</p>
+            <p class="ne-desc">Because Not Even, Therefore Never Ending</p>
+        </header>
+
+        <main>
+            <!-- 核心研究领域 -->
+            <section id="research">
+                <h2>核心研究领域</h2>
+                <div class="research-grid">
+                    <div class="research-card">
+                        <h3>能量守恒式学习法</h3>
+                        <p>揭示当ddl距离＞72小时，人类生产力趋近于0的量子态现象，探索拖延行为的时空连续性</p>
+                        <a href="#" class="btn">查看未完成报告</a>
+                    </div>
+                    
+                    <div class="research-card">
+                        <h3>未完成美学评估体系</h3>
+                        <p>建立半成品艺术的价值标准：残缺代码的诗意、草稿笔记的野性美、未提交论文的悬念张力</p>
+                        <a href="#" class="btn">查看未完成报告</a>
+                    </div>
+                    
+                    <div class="research-card">
+                        <h3>认知资源动态分配学</h3>
+                        <p>研究如何将90%脑力分配给B站/Netflix，同时用剩余10%维持"我在努力"的表象平衡</p>
+                        <a href="#" class="btn">查看未完成报告</a>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- 未及哲学 -->
+            <section class="philosophy">
+                <blockquote>
+                    “未及不是放弃，而是对过程无止境的敬畏。那些深夜亮着的屏幕、堆满草稿的桌面、写了一半又删掉的句子，都是对抗完美暴政的温柔革命。因为 Never Ending，所以我们永远在路上。”
+                </blockquote>
+                <p class="philosophy-author">——《未及宣言》第一章 · 无止境</p>
+            </section>
+            
+            <!-- 永久施工中项目 -->
+            <section id="projects">
+                <h2>永久施工中项目</h2>
+                
+                <div class="project-item">
+                    <h3>全球摸鱼行为白皮书</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p>收集17国学生/社畜的创造性摸鱼策略，目前完成47%（卡在数据分析环节）</p>
+                    <a href="#" class="btn btn-ghost">贡献你的策略</a>
+                </div>
+                
+                <div class="project-item">
+                    <h3>用ChatGPT重写《论语》</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 8.3%"></div>
+                    </div>
+                    <p>"学而时习之，不亦说乎" → "持续学习可提高多巴胺分泌？"（完成8.3章后灵感枯竭）</p>
+                </div>
+                
+                <div class="project-item">
+                    <h3>未完成作品博物馆</h3>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 31%"></div>
+                    </div>
+                    <p>线上展馆：收藏只写了开头的科幻小说、画了线稿的插画、只有README的GitHub仓库...</p>
+                    <a href="#" class="btn btn-ghost">提交你的半成品</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="#">未及哲学</a>
+                <a href="#">施工中项目</a>
+                <a href="#">加入我们</a>
+            </div>
+            <p>©2025 未及研习 | 格言：<q>完成是例外，未及是常态，无止境是归宿</q></p>
+        </footer>
+    </div>
+
+    <script>
+        // 粒子动画生成
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 25;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // 随机位置
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                particle.style.left = `${posX}%`;
+                particle.style.top = `${posY}%`;
+                
+                // 随机动画
+                const size = 3 + Math.random() * 7;
+                const duration = 3 + Math.random() * 7;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animation = `float ${duration}s infinite ease-in-out`;
+                
+                container.appendChild(particle);
+            }
+            
+            // 添加CSS动画
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translate(0, 0); }
+                    25% { transform: translate(${Math.random()*10}px, ${Math.random()*15}px); }
+                    50% { transform: translate(${Math.random()*20}px, ${Math.random()*10}px); }
+                    75% { transform: translate(${Math.random()*15}px, ${Math.random()*20}px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // 初始化
+        window.onload = function() {
+            createParticles();
+            
+            // 为所有按钮添加抖动效果
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseover', function() {
+                    this.style.animation = 'shake 0.5s';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 500);
+                });
+            });
+            
+            // 添加抖动动画
+            const shakeStyle = document.createElement('style');
+            shakeStyle.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    20% { transform: translateX(-5px); }
+                    40% { transform: translateX(5px); }
+                    60% { transform: translateX(-5px); }
+                    80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(shakeStyle);
+        };
+    </script>
+</body>
+</html>
